@@ -1,5 +1,5 @@
 const fs = require('fs');
-class Contenedor {
+class ProductManager {
   constructor(title){
     this.title =title;
   }
@@ -55,8 +55,8 @@ async save(object) {
   }
   }
 }
-module.exports = Contenedor;
-const newProduct = new Contenedor("./productos.txt");
+module.exports = ProductManager;
+const newProduct = new ProductManager("./productos.txt");
 newProduct.firstProduct({
   name: "Producto 1",
   price: 100,
