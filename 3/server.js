@@ -13,7 +13,10 @@ app.get('/productos', async (req, res) => {
     res.send(productos);
 })
 
-app.get('/productoRandom', async (req, res) => {
-  const producto = await listaProductos.getRandom();
+app.get('/productos/:id', async (req, res) => {
+  const producto = await listaProductos.find(producto => producto.id === parseInt(req.params.id));
     res.send(producto);
 })
+// Nota
+// primer ruta te falta verificar si recibis query "limit" para limitar la vista de los productos
+// no entiendo a que se refiere con esta parte
