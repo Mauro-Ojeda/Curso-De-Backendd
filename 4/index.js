@@ -1,3 +1,4 @@
+const fs = require('fs')
 const express = require("express");
 const {Router} = express;
 
@@ -7,22 +8,23 @@ const PORT = 8080
 app.listen(PORT, ()=>{
   console.log('server On')
 })
+app.use(express.static('4/public/index.html'))
+app.use(productos)
 
-const listaProductos=[ 
-  {tittle:"Producto 1", precio:100 , thumbnail:'foto 1', id:1, status:true,description:"Producto numero 1" ,category:1,},
-  {tittle:"Producto 2", precio:200 , thumbnail:'foto 2' ,id:2, status:true,description:"Producto numero 2" ,category:1,},
-  {tittle:"Producto 3", precio:300 , thumbnail:'foto 3', id:3, status:true,description:"Producto numero 3" ,category:2,},
-]
+let data =fs.readFileSync('./data/productos.json')
+let cart =fs.readFileSync('./data/carrito.json')
+
+
 productos.get('/api/productos', (req, res) => {
-  res.send(listaProductos)
+  let prods = JSON.parse(data)
+  res.send(prods)
 })
 productos.put('/api/productos/:id', (req, res) => {
-  const producto = listaProductos.find(producto => producto.id === parseInt(req.params.id))
-  
+  const producto = data.find(producto => producto.id === parseInt(req.params.id))
   res.send(producto)
 })
 productos.get('/api/productos/:id', (req, res) => {
-  const producto=listaProductos.find(producto => producto.id === parseInt(req.params.id))
+  const producto=data.find(producto => producto.id === parseInt(req.params.id))
   res.send(producto)
 })
 productos.post('/api/productos', (req, res) => {
@@ -35,17 +37,16 @@ productos.post('/api/productos', (req, res) => {
     stock: req.body.stock,
     category: req.body.category,
   }
-  listaProductos.push(producto)
+  data.push(producto)
   res.send(producto)
   console.log('guardado con exito')
 } )
 productos.delete('/api/productos/:id', (req, res) => {
-  const producto = listaProductos.find(producto => producto.id === parseInt(req.params.id))
+  const producto = data.find(producto => producto.id === parseInt(req.params.id))
   if (!producto) return res.status(404).send('Producto no encontrado')
-  const index = listaProductos.indexOf(producto)
-  listaProductos.splice(index, 1)
+  const index = data.indexOf(producto)
+  data.splice(index, 1)
   res.send(producto)
 } )
-app.use(productos)
-app.use(express.static('4/public/index.html'))
+
 
