@@ -1,0 +1,28 @@
+{
+  "listaDeProductos":[ 
+    {
+      "tittle":"Producto 1",
+        "precio": 100 , 
+        "thumbnail": "foto 1",
+        "id":1,  
+        "status":true,
+        "description":"Producto numero 1" ,
+        " category":1
+    },{
+      "tittle":"Producto 2",
+        "precio": 200 , 
+        "thumbnail": "foto 2",
+        "id":2,  
+        "status":true,
+        "description":"Producto numero 2" ,
+        " category":1
+    },{
+      "tittle":"Producto 3",
+        "precio": 300 , 
+        "thumbnail": "foto 3",
+        "id":3,  
+        "status":true,
+        "description":"Producto numero 3" ,
+        " category":2
+    }]
+}
